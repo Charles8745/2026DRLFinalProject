@@ -1,0 +1,112 @@
+schema: spec-driven
+
+# Project context
+# This is shown to AI when creating artifacts.
+context: |
+  # Project: 2026 DRL Final Project
+  # Title: LLM Inference Optimization with LoRA and Reinforcement Learning
+  # 基於 LoRA 與強化學習之 LLM 推理優化
+  
+  ## Tech Stack
+  - **Language**: Python 3.10+
+  - **Deep Learning Framework**: PyTorch >= 2.0.0
+  - **LLM Libraries**: Hugging Face Transformers >= 4.30.0
+  - **LoRA Implementation**: PEFT (Parameter-Efficient Fine-Tuning) >= 0.4.0
+  - **Reinforcement Learning**: Stable-Baselines3 >= 2.0.0, Gymnasium >= 0.28.0
+  - **Evaluation Metrics**: SacreBLEU, NLTK, ROUGE
+  - **Testing**: pytest, pytest-cov
+  - **Code Quality**: black, flake8, isort
+  - **Visualization**: matplotlib, seaborn, tensorboard
+  - **Development**: Jupyter Notebook, IPython
+  
+  ## Project Structure
+  ```
+  src/
+    ├── models/         # LLM and LoRA model definitions
+    ├── rl/            # Reinforcement learning modules (PPO, DQN, etc.)
+    ├── optimization/  # Inference optimization (quantization, KV cache, etc.)
+    └── utils/         # Helper functions and utilities
+  data/
+    ├── raw/          # Original datasets
+    ├── processed/    # Preprocessed data
+    └── splits/       # Train/val/test splits
+  experiments/
+    ├── checkpoints/  # Model checkpoints
+    ├── logs/         # Training logs
+    └── results/      # Evaluation results
+  tests/               # Unit and integration tests
+  notebooks/           # Jupyter notebooks for exploration
+  configs/             # Configuration files
+  openspec/            # OpenSpec documentation
+  ```
+  
+  ## Conventions
+  - **Naming**: snake_case for functions and variables, PascalCase for classes
+  - **Commits**: Conventional commits format
+    - feat: new feature
+    - fix: bug fix
+    - docs: documentation
+    - refactor: code refactoring
+    - test: tests
+    - perf: performance improvement
+  - **Code Quality**: 
+    - Black for code formatting
+    - isort for import organization
+    - flake8 for linting
+    - Type hints encouraged
+  - **Documentation**: Docstrings in Google format
+  - **Language**: Both English and Traditional Chinese (繁體中文) supported
+  
+  ## Development Phases
+  1. **Phase 1 (Week 1-2)**: Environment setup, literature review, prototype validation
+  2. **Phase 2 (Week 3-4)**: System architecture design, API design
+  3. **Phase 3 (Week 5-8)**: Core implementation (LoRA, RL, optimization modules)
+  4. **Phase 4 (Week 9-10)**: Model training and performance optimization
+  5. **Phase 5 (Week 11-12)**: Evaluation, analysis, and documentation
+  
+  ## Key Features
+  - LoRA integration for efficient fine-tuning
+  - Reinforcement learning for inference optimization
+  - Multiple optimization techniques (quantization, KV cache, mixed precision)
+  - Comprehensive evaluation framework
+  - Performance benchmarking tools
+  
+  ## Related Documents
+  - **PPT Presentation**: FinalProject_ppt.pdf
+  - **Related Work**: related_work.pdf
+  - **System Design**: 系統設計規格書.pdf
+  - **Development Plan**: OPENSPEC.md
+
+# Per-artifact rules
+# Add custom rules for specific artifacts.
+rules:
+  proposal:
+    - Keep proposals concise but comprehensive
+    - Always include problem statement, solution, and evaluation metrics
+    - Support both English and Traditional Chinese
+    - Include technical feasibility assessment
+  
+  tasks:
+    - Break tasks into chunks of 2-4 hours maximum
+    - Assign clear acceptance criteria
+    - Include dependencies and prerequisites
+    - Estimate effort in story points
+  
+  code:
+    - Include comprehensive docstrings (Google format)
+    - Add type hints to function signatures
+    - Write unit tests for new functions
+    - Follow PEP 8 style guide
+    - Maximum line length: 100 characters
+  
+  documentation:
+    - Use Markdown format
+    - Include examples and code snippets
+    - Support traditional Chinese (繁體中文) for explanations
+    - Include diagrams where relevant
+  
+  specs:
+    - Include acceptance criteria
+    - Define clear interfaces and APIs
+    - Document dependencies and assumptions
+    - Include performance requirements
