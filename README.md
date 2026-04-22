@@ -11,11 +11,11 @@
 ## 📑 項目文檔
 
 ### 1. 📊 PPT 演示與介紹
-- **文件**: `ppt_ref.pptx` / `ppt_ref.html`
+- **文件**: `FinalProject_ppt.pdf`
 - **內容**: 專題的完整介紹、技術方案、預期成果
 - **查看方式**: 
-  - PowerPoint 版本: `ppt_ref.pptx`
-  - 網頁版本: 在瀏覽器中打開 `ppt_ref.html`
+  - PDF 版本: `FinalProject_ppt.pdf`
+  - 在 PDF 閱讀器中打開或在瀏覽器中查看
 
 ### 2. 📖 相關工作 (Related Work)
 - **文件**: `related work.pdf`
@@ -50,10 +50,11 @@
 ```
 .
 ├── README.md                    # 本文件
-├── ppt_ref.pptx               # PPT 演示文件
-├── ppt_ref.html               # PPT 網頁版本
-├── related_work.pdf           # 相關工作文獻
-└── 系統設計規格書.pdf         # 系統設計規格書
+├── FinalProject_ppt.pdf        # PPT 演示文件
+├── related_work.pdf            # 相關工作文獻
+├── 系統設計規格書.pdf          # 系統設計規格書
+├── OPENSPEC.md                 # OpenSpec 基礎計劃
+└── .gitignore                  # Git 忽略文件配置
 ```
 
 ---
@@ -61,9 +62,10 @@
 ## 🚀 快速開始
 
 ### 瞭解項目
-1. 查看 `ppt_ref.html` 或 `ppt_ref.pptx` 了解項目整體概況
+1. 查看 `FinalProject_ppt.pdf` 了解項目整體概況
 2. 閱讀 `related_work.pdf` 了解相關技術背景
 3. 參考 `系統設計規格書.pdf` 了解詳細的實現方案
+4. 查看 `OPENSPEC.md` 了解項目基礎計劃和開發路線圖
 
 ### 後續開發
 - 代碼實現將在後續提交
