@@ -348,32 +348,49 @@ Policy: π(action|state) → 決策 token pruning、量化策略等
 
 ## 🛠️ 技術棧架構
 
-![技術棧](./assets/images/tech_stack.svg)
+### 技術棧 UML 套件圖
 
-### 技術棧詳解
+```mermaid
+graph TD
+    subgraph APP["🖥️ Application Layer"]
+        CLI["CLI Tools\npython train.py / evaluate.py"]
+        API["Python API\nLoRAModel / PPOTrainer / InferenceEngine"]
+        CFG["Config Files\nconfigs/default.yaml"]
+    end
 
-```yaml
-Deep Learning Framework:
-  PyTorch >= 2.0.0          # 核心深度學習框架
-  Transformers >= 4.30.0    # Hugging Face Transformers
-  PEFT >= 0.4.0             # LoRA 實現
+    subgraph CORE["⚙️ Core Framework"]
+        PT["PyTorch >= 2.0.0\n核心計算框架"]
+        HF["Transformers >= 4.30.0\nLLM 模型與分詞器"]
+        PEFT["PEFT >= 0.4.0\nLoRA 實現"]
+        SB3["Stable-Baselines3 >= 2.0.0\nPPO / DQN 算法"]
+        GYM["Gymnasium >= 0.28.0\nRL 環境接口"]
+    end
 
-Reinforcement Learning:
-  Stable-Baselines3 >= 2.0.0  # RL 算法實現
-  Gymnasium >= 0.28.0         # RL 環境
+    subgraph MOD["🧩 Core Modules"]
+        MODELS["models/\nBaseLLMModel\nLoRAAdapter\nOptimizedModel"]
+        RL["rl/\nPolicyNetwork\nPPOTrainer\nDQNTrainer"]
+        OPT["optimization/\nQuantizer\nKVCache\nMixedPrecision"]
+        UTILS["utils/\nDataUtils\nMetrics\nLogger"]
+    end
 
-Evaluation & Monitoring:
-  SacreBLEU                   # 機器翻譯評估
-  NLTK, ROUGE                 # 文本評估
-  scikit-learn                # 機器學習工具
-  TensorBoard                 # 訓練監控
-  Weights & Biases            # 實驗跟蹤
+    subgraph EVAL["📊 Evaluation & Monitoring"]
+        BLEU["SacreBLEU >= 2.3.0\n機器翻譯評估"]
+        NLTK["NLTK / ROUGE\n文本評估"]
+        TB["TensorBoard >= 2.13.0\n訓練視覺化"]
+        WB["Weights & Biases\n實驗追蹤"]
+    end
 
-Development Tools:
-  pytest >= 7.4.0             # 單元測試
-  black >= 23.0.0             # 代碼格式化
-  flake8 >= 6.0.0             # 代碼檢查
-  isort >= 5.12.0             # Import 排序
+    subgraph DEV["🔧 Development Tools"]
+        TEST["pytest >= 7.4.0\n單元 / 整合測試"]
+        FMT["black >= 23.0.0\n代碼格式化"]
+        LINT["flake8 >= 6.0.0\n代碼檢查"]
+        ISORT["isort >= 5.12.0\nImport 排序"]
+    end
+
+    APP --> CORE
+    CORE --> MOD
+    MOD --> EVAL
+    APP -.-> DEV
 ```
 
 ### 完整技術棧表格
