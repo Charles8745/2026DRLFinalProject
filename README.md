@@ -4,6 +4,7 @@
 > 一個結合參數高效微調和強化學習的大型語言模型推理優化系統
 
 [![GitHub](https://img.shields.io/badge/GitHub-Charles8745-blue?logo=github)](https://github.com/Charles8745/2026DRLFinalProject)
+[![YouTube](https://img.shields.io/badge/YouTube-介紹影片-red?logo=youtube)](https://youtu.be/aoGGqbCDNkg)
 [![Status](https://img.shields.io/badge/Status-Active%20Development-brightgreen)]()
 [![Version](https://img.shields.io/badge/Version-1.0.0-blue)]()
 [![License](https://img.shields.io/badge/License-MIT-green)]()
@@ -196,6 +197,9 @@ python -c "import transformers; print(f'Transformers {transformers.__version__}'
 
 ### 2️⃣ 了解項目
 
+#### 📹 觀看介紹影片
+**快速了解項目概況**: [YouTube - 項目介紹影片](https://youtu.be/aoGGqbCDNkg)
+
 #### 查看項目文檔
 ```bash
 # 查看完整開發計劃
@@ -209,6 +213,7 @@ open FinalProject_ppt.pdf  # macOS
 #### 瀏覽文檔
 | 文件 | 說明 |
 |------|------|
+| 📹 [介紹影片](https://youtu.be/aoGGqbCDNkg) | YouTube 上的項目介紹和技術方案講解 |
 | `FinalProject_ppt.pdf` | 項目完整演示和技術方案 |
 | `related_work.pdf` | 相關研究和技術背景 |
 | `系統設計規格書.pdf` | 詳細系統設計規範 |
