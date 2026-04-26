@@ -61,35 +61,112 @@
 
 ### 系統架構 UML 類圖
 
-![系統架構 UML 設計](./assets/images/uml_system_architecture.svg)
+```mermaid
+classDiagram
+    class BaseLLMModel {
+        -String model_id
+        -Dict config
+        -Tensor weights
+        -String device
+        -int max_seq_length
+        +load_model(path)
+        +forward(input) Tensor
+        +generate(prompt) String
+        +get_attention() Tensor
+    }
+
+    class LoRAAdapter {
+        -int rank
+        -float alpha
+        -Tensor lora_A
+        -Tensor lora_B
+        -List target_layers
+        +init_lora(model)
+        +forward(x) Tensor
+        +merge_weights()
+        +get_trainable_params() int
+    }
+
+    class RLPolicyNetwork {
+        -int state_dim
+        -int action_dim
+        -int hidden_dim
+        -Network policy_net
+        -Network value_net
+        +get_action(state) Action
+        +get_value(state) float
+        +update_policy(loss)
+        +compute_advantages() Tensor
+    }
+
+    class OptimizationEngine {
+        -Quantizer quantizer
+        -KVCache kv_cache
+        -bool mixed_precision
+        -Pruner pruner
+        -List techniques
+        +apply_quantization()
+        +optimize_kv_cache()
+        +apply_pruning()
+        +benchmark() Dict
+    }
+
+    class DataProcessor {
+        -Tokenizer tokenizer
+        -int batch_size
+        +load_data(path) Dataset
+        +tokenize(texts) Tensor
+        +batch_data() DataLoader
+    }
+
+    class EvaluationModule {
+        -Dict metrics
+        -float threshold
+        +compute_bleu() float
+        +compute_rouge() float
+        +evaluate_all() Dict
+    }
+
+    class TrainingTrainer {
+        -Optimizer optimizer
+        -Scheduler lr_scheduler
+        +train_epoch(loader)
+        +validate(loader) Dict
+        +save_checkpoint(path)
+    }
+
+    class MonitoringLogger {
+        -String log_dir
+        -TensorBoard writer
+        +log_metrics(metrics)
+        +log_model(model)
+        +visualize()
+    }
+
+    BaseLLMModel "1" --> "1" LoRAAdapter : enhances
+    LoRAAdapter "1" --> "1" RLPolicyNetwork : feeds state
+    RLPolicyNetwork "1" --> "1" OptimizationEngine : applies strategy
+    TrainingTrainer "1" --> "1" BaseLLMModel : trains
+    TrainingTrainer "1" --> "1" LoRAAdapter : fine-tunes
+    TrainingTrainer "1" --> "1" RLPolicyNetwork : optimizes
+    EvaluationModule "1" --> "1" OptimizationEngine : evaluates
+    DataProcessor "1" --> "1" TrainingTrainer : supplies data
+    MonitoringLogger "1" ..> "1" TrainingTrainer : observes
+    MonitoringLogger "1" ..> "1" RLPolicyNetwork : observes
+```
 
 **系統設計說明**：
 
 #### 核心層級 (Core Classes)
-1. **BaseLLMModel**: 凍結的基礎 LLM 模型
-   - 負責基本的文本生成和特徵提取
-   - 保持原始模型的參數完整性
-   - 提供注意力機制訪問接口
-
-2. **LoRAAdapter**: 參數高效的微調適配層
-   - 實現秩為 r 的低秩分解：ΔW = B·A^T
-   - 減少 99% 的可訓練參數
-   - 支持動態合併和分離權重
-
-3. **RLPolicyNetwork**: 強化學習策略網絡
-   - 優化推理策略和決策過程
-   - 使用 PPO/DQN 算法進行訓練
-   - 學習 token 剪枝、量化等策略
-
-4. **OptimizationEngine**: 優化執行引擎
-   - 應用量化、KV 緩存、混合精度等技術
-   - 協調多優化技術的執行順序
-   - 性能基準測試
+1. **BaseLLMModel**: 凍結的基礎 LLM 模型，負責基本文本生成和特徵提取
+2. **LoRAAdapter**: 低秩適配層，實現 ΔW = B·A^T，減少 99% 可訓練參數
+3. **RLPolicyNetwork**: 強化學習策略網絡，使用 PPO/DQN 優化推理決策
+4. **OptimizationEngine**: 應用量化、KV 緩存、混合精度等多重優化技術
 
 #### 支持模塊 (Auxiliary Modules)
 - **DataProcessor**: 數據預處理和批次化
 - **EvaluationModule**: 多指標評估（BLEU、ROUGE 等）
-- **TrainingTrainer**: 統一的訓練管理
+- **TrainingTrainer**: 統一訓練流程管理
 - **MonitoringLogger**: 實時性能監控和日誌記錄
 
 ---
