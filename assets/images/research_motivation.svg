@@ -1,0 +1,118 @@
+<svg width="1200" height="700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-size: 22px; font-weight: bold; fill: #1a1a1a; }
+      .subtitle { font-size: 16px; font-weight: bold; fill: #333; }
+      .text { font-size: 13px; fill: #444; line-height: 1.6; }
+      .problem-box { fill: #FFF3E0; stroke: #FF6F00; stroke-width: 2; }
+      .solution-box { fill: #E8F5E9; stroke: #2E7D32; stroke-width: 2; }
+      .highlight { font-weight: bold; fill: #D32F2F; }
+      .label { font-size: 12px; font-weight: bold; fill: white; }
+      .stat-box { fill: #FFFFFF; stroke: #333; stroke-width: 1.5; }
+      .stat-value { font-size: 24px; font-weight: bold; }
+      .stat-label { font-size: 12px; fill: #666; }
+      .comparison-box { fill: #F5F5F5; stroke: #999; stroke-width: 1; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="700" fill="#FAFAFA"/>
+  
+  <!-- Main Title -->
+  <text x="600" y="35" text-anchor="middle" class="title">研究動機 - LLM 推理能力的缺失</text>
+  
+  <!-- Problem Statement Section -->
+  <text x="50" y="70" class="subtitle">當前問題</text>
+  <rect x="30" y="80" width="1140" height="120" class="problem-box" rx="8"/>
+  
+  <text x="60" y="105" class="text">傳統測試顯示模型數學能力達人類水準，但 GSM-Symbolic 權威研究揭露：模型僅是</text>
+  <text x="60" y="125" class="text"><tspan class="highlight">「背誦模式」(Pattern Matching)</tspan>，缺乏真正的 System 2 思考。</text>
+  
+  <text x="60" y="155" class="text" font-style="italic">這意味著 LLM 無法真正理解推理過程，只能複製訓練數據的模式。</text>
+  <text x="60" y="175" class="text" font-style="italic">導致在複雜推理、長序列推理、對抗性輸入等場景中性能急劇下降。</text>
+  
+  <!-- Research Findings Section -->
+  <text x="50" y="235" class="subtitle">GSM-Symbolic 研究發現</text>
+  
+  <!-- Left Box: Standard Test -->
+  <rect x="50" y="250" width="520" height="200" class="stat-box" rx="8"/>
+  
+  <rect x="70" y="270" width="480" height="50" class="comparison-box" rx="5"/>
+  <text x="310" y="290" text-anchor="middle" class="stat-value" fill="#2E7D32">94.6%</text>
+  <text x="310" y="315" text-anchor="middle" class="stat-label">標準 GSM8K 測試</text>
+  <text x="310" y="330" text-anchor="middle" class="stat-label" font-size="11">Llama-3-8B 表面上的數學解題率</text>
+  
+  <text x="70" y="360" class="text" fill="#333">
+    <tspan font-weight="bold">✓ 在標準基準上表現優異</tspan>
+    <tspan x="70" dy="20">✓ 模型可以生成看似合理的解</tspan>
+    <tspan x="70" dy="20">✓ 通過規則符號驗證</tspan>
+  </text>
+  
+  <!-- Right Box: Variable Names Test (Problem) -->
+  <rect x="630" y="250" width="520" height="200" class="stat-box" rx="8"/>
+  
+  <rect x="650" y="270" width="480" height="50" class="comparison-box" rx="5"/>
+  <text x="890" y="290" text-anchor="middle" class="stat-value" fill="#D32F2F">-65%</text>
+  <text x="890" y="315" text-anchor="middle" class="stat-label">變更變數與名字後 (GSM-Symbolic)</text>
+  <text x="890" y="330" text-anchor="middle" class="stat-label" font-size="11">準確率呈現衰減性衰退</text>
+  
+  <text x="650" y="360" class="text" fill="#333">
+    <tspan font-weight="bold">✗ 準確率大幅下降 65%</tspan>
+    <tspan x="650" dy="20">✗ 模型依賴表面特徵，而非邏輯推理</tspan>
+    <tspan x="650" dy="20">✗ 缺乏真正的 System 2 思考能力</tspan>
+  </text>
+  
+  <!-- Key Insights -->
+  <text x="50" y="480" class="subtitle">核心洞察</text>
+  
+  <!-- Insight Boxes -->
+  <g>
+    <!-- Box 1: Pattern Matching -->
+    <rect x="50" y="500" width="360" height="140" fill="#FFEBEE" stroke="#C62828" stroke-width="2" rx="8"/>
+    <circle cx="85" cy="525" r="18" fill="#C62828"/>
+    <text x="85" y="533" text-anchor="middle" fill="white" font-weight="bold" font-size="14">1</text>
+    
+    <text x="115" y="525" class="subtitle">背誦 vs 推理</text>
+    <text x="60" y="550" class="text" font-size="12">
+      <tspan>模型通過學習訓練數據中的</tspan>
+      <tspan x="60" dy="18">統計模式來「解決」問題，</tspan>
+      <tspan x="60" dy="18">而非進行真正的邏輯推理。</tspan>
+    </text>
+  </g>
+  
+  <!-- Box 2: Variable Sensitivity -->
+  <g>
+    <rect x="420" y="500" width="360" height="140" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="2" rx="8"/>
+    <circle cx="455" cy="525" r="18" fill="#6A1B9A"/>
+    <text x="455" y="533" text-anchor="middle" fill="white" font-weight="bold" font-size="14">2</text>
+    
+    <text x="485" y="525" class="subtitle">變數敏感性</text>
+    <text x="430" y="550" class="text" font-size="12">
+      <tspan>改變變數名稱導致性能崩潰，</tspan>
+      <tspan x="430" dy="18">證明模型依賴於表面特徵識別，</tspan>
+      <tspan x="430" dy="18">而非語義理解。</tspan>
+    </text>
+  </g>
+  
+  <!-- Box 3: Inference Challenges -->
+  <g>
+    <rect x="790" y="500" width="360" height="140" fill="#E0F2F1" stroke="#00695C" stroke-width="2" rx="8"/>
+    <circle cx="825" cy="525" r="18" fill="#00695C"/>
+    <text x="825" y="533" text-anchor="middle" fill="white" font-weight="bold" font-size="14">3</text>
+    
+    <text x="855" y="525" class="subtitle">推理性能問題</text>
+    <text x="800" y="550" class="text" font-size="12">
+      <tspan>LLM 的推理過程存在：</tspan>
+      <tspan x="800" dy="18">• 高計算複雜度 • 低效資源利用</tspan>
+      <tspan x="800" dy="18">• 缺乏可驗證的推理過程</tspan>
+    </text>
+  </g>
+  
+  <!-- Bottom: Solution Direction -->
+  <text x="50" y="670" class="subtitle">本項目的解決方向</text>
+  <rect x="200" y="675" width="800" height="5" fill="#2E7D32" rx="2"/>
+  <text x="600" y="695" text-anchor="middle" class="text" fill="#2E7D32" font-weight="bold">
+    通過 LoRA 微調 + RL 優化，增強 LLM 的真實推理能力，而非單純的模式匹配性能
+  </text>
+  
+</svg>

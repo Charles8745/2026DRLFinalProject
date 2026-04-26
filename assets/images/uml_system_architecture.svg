@@ -1,0 +1,278 @@
+<svg width="1200" height="900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .uml-class { font-family: Arial, sans-serif; font-size: 12px; }
+      .class-header { fill: #4A90E2; color: white; font-weight: bold; }
+      .class-body { fill: white; stroke: #333; stroke-width: 1; }
+      .class-border { stroke: #333; stroke-width: 2; }
+      .attribute { font-size: 11px; }
+      .method { font-size: 11px; }
+      .inheritance { stroke: #333; stroke-width: 2; fill: none; marker-end: url(#arrowhead-inheritance); }
+      .association { stroke: #666; stroke-width: 1.5; fill: none; marker-end: url(#arrowhead-association); }
+      .composition { stroke: #666; stroke-width: 1.5; fill: none; marker-end: url(#arrowhead-composition); }
+      .title { font-size: 20px; font-weight: bold; fill: #333; }
+      .section-label { font-size: 13px; font-weight: bold; fill: #4A90E2; }
+      .note { fill: #FFFFCC; stroke: #FF9800; stroke-width: 1; }
+      .note-text { font-size: 10px; fill: #333; }
+    </style>
+    
+    <marker id="arrowhead-inheritance" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L10,3 L0,6 Z" stroke="none" fill="white" stroke-width="2"/>
+      <path d="M1,1 L9,3 L1,5" stroke="#333" fill="none" stroke-width="1.5"/>
+    </marker>
+    
+    <marker id="arrowhead-association" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L10,3 L0,6 Z" stroke="#666" fill="#666"/>
+    </marker>
+    
+    <marker id="arrowhead-composition" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L10,3 L0,6 Z" stroke="#666" fill="#666"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#F5F5F5"/>
+  
+  <!-- Title -->
+  <text x="600" y="30" text-anchor="middle" class="title">系統架構 UML 類圖 - LLM 推理優化系統</text>
+  
+  <!-- Legend -->
+  <text x="50" y="55" class="section-label">系統層級概覽</text>
+  
+  <!-- 1. Base LLM Model Class -->
+  <g class="uml-class">
+    <rect x="50" y="80" width="220" height="200" class="class-border" fill="white"/>
+    <rect x="50" y="80" width="220" height="30" class="class-header" fill="#2E7D32"/>
+    <text x="160" y="100" text-anchor="middle" fill="white" font-weight="bold">BaseLLMModel</text>
+    
+    <line x1="50" y1="110" x2="270" y2="110" stroke="#333" stroke-width="1"/>
+    
+    <!-- Attributes -->
+    <text x="60" y="130" class="attribute">- model_id: str</text>
+    <text x="60" y="145" class="attribute">- config: Dict</text>
+    <text x="60" y="160" class="attribute">- weights: Tensor</text>
+    <text x="60" y="175" class="attribute">- device: str</text>
+    <text x="60" y="190" class="attribute">- max_seq_length: int</text>
+    
+    <line x1="50" y1="200" x2="270" y2="200" stroke="#333" stroke-width="1"/>
+    
+    <!-- Methods -->
+    <text x="60" y="220" class="method">+ load_model(path)</text>
+    <text x="60" y="235" class="method">+ forward(input)</text>
+    <text x="60" y="250" class="method">+ generate(prompt)</text>
+    <text x="60" y="265" class="method">+ get_attention()</text>
+  </g>
+  
+  <!-- 2. LoRA Adapter Class -->
+  <g class="uml-class">
+    <rect x="350" y="80" width="220" height="200" class="class-border" fill="white"/>
+    <rect x="350" y="80" width="220" height="30" class="class-header" fill="#1565C0"/>
+    <text x="460" y="100" text-anchor="middle" fill="white" font-weight="bold">LoRAAdapter</text>
+    
+    <line x1="350" y1="110" x2="570" y2="110" stroke="#333" stroke-width="1"/>
+    
+    <!-- Attributes -->
+    <text x="360" y="130" class="attribute">- rank: int</text>
+    <text x="360" y="145" class="attribute">- alpha: float</text>
+    <text x="360" y="160" class="attribute">- lora_A: Tensor</text>
+    <text x="360" y="175" class="attribute">- lora_B: Tensor</text>
+    <text x="360" y="190" class="attribute">- target_layers: List</text>
+    
+    <line x1="350" y1="200" x2="570" y2="200" stroke="#333" stroke-width="1"/>
+    
+    <!-- Methods -->
+    <text x="360" y="220" class="method">+ init_lora(model)</text>
+    <text x="360" y="235" class="method">+ forward(x)</text>
+    <text x="360" y="250" class="method">+ merge_weights()</text>
+    <text x="360" y="265" class="method">+ get_trainable_params()</text>
+  </g>
+  
+  <!-- 3. RL Policy Network Class -->
+  <g class="uml-class">
+    <rect x="650" y="80" width="220" height="200" class="class-border" fill="white"/>
+    <rect x="650" y="80" width="220" height="30" class="class-header" fill="#D32F2F"/>
+    <text x="760" y="100" text-anchor="middle" fill="white" font-weight="bold">RLPolicyNetwork</text>
+    
+    <line x1="650" y1="110" x2="870" y2="110" stroke="#333" stroke-width="1"/>
+    
+    <!-- Attributes -->
+    <text x="660" y="130" class="attribute">- state_dim: int</text>
+    <text x="660" y="145" class="attribute">- action_dim: int</text>
+    <text x="660" y="160" class="attribute">- hidden_dim: int</text>
+    <text x="660" y="175" class="attribute">- policy_net: Network</text>
+    <text x="660" y="190" class="attribute">- value_net: Network</text>
+    
+    <line x1="650" y1="200" x2="870" y2="200" stroke="#333" stroke-width="1"/>
+    
+    <!-- Methods -->
+    <text x="660" y="220" class="method">+ get_action(state)</text>
+    <text x="660" y="235" class="method">+ get_value(state)</text>
+    <text x="660" y="250" class="method">+ update_policy(loss)</text>
+    <text x="660" y="265" class="method">+ compute_advantages()</text>
+  </g>
+  
+  <!-- 4. Optimization Techniques Class -->
+  <g class="uml-class">
+    <rect x="950" y="80" width="220" height="200" class="class-border" fill="white"/>
+    <rect x="950" y="80" width="220" height="30" class="class-header" fill="#F57C00"/>
+    <text x="1060" y="100" text-anchor="middle" fill="white" font-weight="bold">OptimizationEngine</text>
+    
+    <line x1="950" y1="110" x2="1170" y2="110" stroke="#333" stroke-width="1"/>
+    
+    <!-- Attributes -->
+    <text x="960" y="130" class="attribute">- quantizer: Quantizer</text>
+    <text x="960" y="145" class="attribute">- kv_cache: KVCache</text>
+    <text x="960" y="160" class="attribute">- mixed_precision: bool</text>
+    <text x="960" y="175" class="attribute">- pruner: Pruner</text>
+    <text x="960" y="190" class="attribute">- techniques: List</text>
+    
+    <line x1="950" y1="200" x2="1170" y2="200" stroke="#333" stroke-width="1"/>
+    
+    <!-- Methods -->
+    <text x="960" y="220" class="method">+ apply_quantization()</text>
+    <text x="960" y="235" class="method">+ optimize_kv_cache()</text>
+    <text x="960" y="250" class="method">+ apply_pruning()</text>
+    <text x="960" y="265" class="method">+ benchmark()</text>
+  </g>
+  
+  <!-- Associations between classes -->
+  <!-- BaseLLMModel -> LoRAAdapter -->
+  <path d="M 270 150 L 350 150" class="association" stroke-width="2"/>
+  <text x="305" y="140" font-size="10" fill="#333">enhances</text>
+  
+  <!-- LoRAAdapter -> RLPolicyNetwork -->
+  <path d="M 570 150 L 650 150" class="association" stroke-width="2"/>
+  <text x="605" y="140" font-size="10" fill="#333">optimizes</text>
+  
+  <!-- RLPolicyNetwork -> OptimizationEngine -->
+  <path d="M 870 150 L 950 150" class="association" stroke-width="2"/>
+  <text x="905" y="140" font-size="10" fill="#333">applies</text>
+  
+  <!-- Layer 2: Component Classes -->
+  <text x="50" y="330" class="section-label">子系統模塊</text>
+  
+  <!-- 5. Data Processing Module -->
+  <g class="uml-class">
+    <rect x="50" y="350" width="200" height="150" class="class-border" fill="#E8F5E9"/>
+    <rect x="50" y="350" width="200" height="25" class="class-header" fill="#689F38"/>
+    <text x="150" y="367" text-anchor="middle" fill="white" font-weight="bold">DataProcessor</text>
+    
+    <line x1="50" y1="375" x2="250" y2="375" stroke="#333" stroke-width="1"/>
+    
+    <text x="60" y="395" class="attribute">- tokenizer: Tokenizer</text>
+    <text x="60" y="410" class="attribute">- batch_size: int</text>
+    
+    <line x1="50" y1="420" x2="250" y2="420" stroke="#333" stroke-width="1"/>
+    
+    <text x="60" y="440" class="method">+ load_data(path)</text>
+    <text x="60" y="455" class="method">+ tokenize(texts)</text>
+    <text x="60" y="470" class="method">+ batch_data()</text>
+  </g>
+  
+  <!-- 6. Evaluation Module -->
+  <g class="uml-class">
+    <rect x="320" y="350" width="200" height="150" class="class-border" fill="#F3E5F5"/>
+    <rect x="320" y="350" width="200" height="25" class="class-header" fill="#7B1FA2"/>
+    <text x="420" y="367" text-anchor="middle" fill="white" font-weight="bold">EvaluationModule</text>
+    
+    <line x1="320" y1="375" x2="520" y2="375" stroke="#333" stroke-width="1"/>
+    
+    <text x="330" y="395" class="attribute">- metrics: Dict</text>
+    <text x="330" y="410" class="attribute">- threshold: float</text>
+    
+    <line x1="320" y1="420" x2="520" y2="420" stroke="#333" stroke-width="1"/>
+    
+    <text x="330" y="440" class="method">+ compute_bleu()</text>
+    <text x="330" y="455" class="method">+ compute_rouge()</text>
+    <text x="330" y="470" class="method">+ evaluate_all()</text>
+  </g>
+  
+  <!-- 7. Training Trainer -->
+  <g class="uml-class">
+    <rect x="590" y="350" width="200" height="150" class="class-border" fill="#FCE4EC"/>
+    <rect x="590" y="350" width="200" height="25" class="class-header" fill="#C2185B"/>
+    <text x="690" y="367" text-anchor="middle" fill="white" font-weight="bold">TrainingTrainer</text>
+    
+    <line x1="590" y1="375" x2="790" y2="375" stroke="#333" stroke-width="1"/>
+    
+    <text x="600" y="395" class="attribute">- optimizer: Optimizer</text>
+    <text x="600" y="410" class="attribute">- lr_scheduler: Scheduler</text>
+    
+    <line x1="590" y1="420" x2="790" y2="420" stroke="#333" stroke-width="1"/>
+    
+    <text x="600" y="440" class="method">+ train_epoch()</text>
+    <text x="600" y="455" class="method">+ validate()</text>
+    <text x="600" y="470" class="method">+ save_checkpoint()</text>
+  </g>
+  
+  <!-- 8. Monitoring Logger -->
+  <g class="uml-class">
+    <rect x="860" y="350" width="200" height="150" class="class-border" fill="#E0F2F1"/>
+    <rect x="860" y="350" width="200" height="25" class="class-header" fill="#00796B"/>
+    <text x="960" y="367" text-anchor="middle" fill="white" font-weight="bold">MonitoringLogger</text>
+    
+    <line x1="860" y1="375" x2="1060" y2="375" stroke="#333" stroke-width="1"/>
+    
+    <text x="870" y="395" class="attribute">- log_dir: str</text>
+    <text x="870" y="410" class="attribute">- writer: TensorBoard</text>
+    
+    <line x1="860" y1="420" x2="1060" y2="420" stroke="#333" stroke-width="1"/>
+    
+    <text x="870" y="440" class="method">+ log_metrics()</text>
+    <text x="870" y="455" class="method">+ log_model()</text>
+    <text x="870" y="470" class="method">+ visualize()</text>
+  </g>
+  
+  <!-- System Flow -->
+  <text x="50" y="560" class="section-label">數據流與交互</text>
+  
+  <!-- Input -->
+  <rect x="100" y="590" width="100" height="60" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2" rx="5"/>
+  <text x="150" y="625" text-anchor="middle" font-weight="bold" font-size="12">Input Text</text>
+  
+  <!-- DataProcessor -->
+  <path d="M 200 620 L 280 620" stroke="#333" stroke-width="2" marker-end="url(#arrowhead-association)"/>
+  <rect x="280" y="590" width="100" height="60" fill="#E8F5E9" stroke="#689F38" stroke-width="2" rx="5"/>
+  <text x="330" y="620" text-anchor="middle" font-weight="bold" font-size="11">Data</text>
+  <text x="330" y="635" text-anchor="middle" font-size="10">Processor</text>
+  
+  <!-- Tokenized Input -->
+  <path d="M 380 620 L 460 620" stroke="#333" stroke-width="2" marker-end="url(#arrowhead-association)"/>
+  <rect x="460" y="590" width="100" height="60" fill="#BBE3FF" stroke="#1565C0" stroke-width="2" rx="5"/>
+  <text x="510" y="625" text-anchor="middle" font-weight="bold" font-size="12">Tokens</text>
+  
+  <!-- Base Model -->
+  <path d="M 560 620 L 640 620" stroke="#333" stroke-width="2" marker-end="url(#arrowhead-association)"/>
+  <rect x="640" y="590" width="100" height="60" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2" rx="5"/>
+  <text x="690" y="615" text-anchor="middle" font-weight="bold" font-size="11">Base</text>
+  <text x="690" y="630" text-anchor="middle" font-weight="bold" font-size="11">LLM</text>
+  
+  <!-- LoRA Enhancement -->
+  <path d="M 740 620 L 820 620" stroke="#333" stroke-width="2" marker-end="url(#arrowhead-association)"/>
+  <rect x="820" y="590" width="100" height="60" fill="#BBDEFB" stroke="#1565C0" stroke-width="2" rx="5"/>
+  <text x="870" y="615" text-anchor="middle" font-weight="bold" font-size="11">LoRA</text>
+  <text x="870" y="630" text-anchor="middle" font-weight="bold" font-size="11">Enhanced</text>
+  
+  <!-- RL Optimization -->
+  <path d="M 920 620 L 1000 620" stroke="#333" stroke-width="2" marker-end="url(#arrowhead-association)"/>
+  <rect x="1000" y="590" width="100" height="60" fill="#FFCCBC" stroke="#F57C00" stroke-width="2" rx="5"/>
+  <text x="1050" y="615" text-anchor="middle" font-weight="bold" font-size="11">RL</text>
+  <text x="1050" y="630" text-anchor="middle" font-weight="bold" font-size="11">Optimized</text>
+  
+  <!-- Output -->
+  <path d="M 1050 650 L 1050 720 L 980 720" stroke="#333" stroke-width="2" marker-end="url(#arrowhead-association)"/>
+  <rect x="880" y="690" width="100" height="60" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2" rx="5"/>
+  <text x="930" y="720" text-anchor="middle" font-weight="bold" font-size="11">Output</text>
+  <text x="930" y="735" text-anchor="middle" font-size="10">Sequence</text>
+  
+  <!-- Evaluation Feedback -->
+  <path d="M 930 750 L 750 750 L 750 680" stroke="#999" stroke-width="1.5" stroke-dasharray="5,5"/>
+  <text x="800" y="740" font-size="10" fill="#666">evaluation feedback</text>
+  
+  <!-- Monitoring -->
+  <path d="M 700 650 L 700 810" stroke="#999" stroke-width="1.5"/>
+  <text x="710" y="730" font-size="10" fill="#666">monitoring</text>
+  <rect x="650" y="820" width="100" height="40" fill="#E0F2F1" stroke="#00796B" stroke-width="2" rx="3"/>
+  <text x="700" y="846" text-anchor="middle" font-size="11" font-weight="bold">Logs & Metrics</text>
+  
+</svg>
